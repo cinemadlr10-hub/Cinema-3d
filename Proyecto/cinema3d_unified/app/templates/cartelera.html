@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- Barra superior con botón Registrarse -->
+<div class="toolbar">
+  <a href="/registro" class="btn-register">Registrarse</a>
+</div>
+
+<section class="filters">
+  <form method="get" action="/cartelera">
+    <label>
+      Género:
+      <select name="genero">
+        <option value="">Todos</option>
+        {% for g in genres %}
+          <option value="{{ g }}" {{ "selected" if g == genero else "" }}>{{ g }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label>
+      Día:
+      <input type="date" name="dia" value="{{ dia }}">
+    </label>
+    <label class="grow">
+      Buscar:
+      <input type="text" name="q" placeholder="Título o sinopsis" value="{{ q }}">
+    </label>
+    <button type="submit">Filtrar</button>
+    <a class="reset" href="/cartelera">Reset</a>
+  </form>
+</section>
+
+<section class="grid">
+  {% if movies|length == 0 %}
+    <p>No hay resultados con los filtros aplicados.</p>
+  {% endif %}
+
+  {% for m in movies %}
+    <article class="card">
+      <img class="poster" src="{{ m.poster_url }}" alt="Poster {{ m.titulo }}">
+      <div class="card-body">
+        <h3>{{ m.titulo }}</h3>
+        <p class="meta">{{ m.genero }} · {{ m.clasificacion }} · {{ m.duracion_min }} min</p>
+        <p class="sinopsis">{{ m.sinopsis }}</p>
+        <div class="funciones">
+          <strong>Funciones:</strong>
+          <ul>
+            {% for f in m.funciones %}
+              <li>{{ f.fecha }} — {{ "%02d:%02d"|format(f.hora.hour, f.hora.minute) }} ({{ f.sala }})</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </article>
+  {% endfor %}
+</section>
+
+{% endblock %}
