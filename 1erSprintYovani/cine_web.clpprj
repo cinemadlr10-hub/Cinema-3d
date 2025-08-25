@@ -1,0 +1,156 @@
+<?xml version='1.0' encoding='utf-8'?>
+<project name="C:\Users\yovan\Desktop\cine_web\cine_web.clpprj">
+ <settings>
+  <PM_URL><![CDATA[http://localhost/C:/Users/yovan/Desktop/cine_web]]></PM_URL>
+  <PM_HOME_URL><![CDATA[http://localhost/C:/Users/yovan/Desktop/cine_web]]></PM_HOME_URL>
+  <PM_LIBS><![CDATA[]]></PM_LIBS>
+  <PM_FTP_CONNECTION><![CDATA[]]></PM_FTP_CONNECTION>
+  <PM_FTP_DIR><![CDATA[]]></PM_FTP_DIR>
+  <PM_FTP_UPLOAD_ON_SAVE><![CDATA[INT:0]]></PM_FTP_UPLOAD_ON_SAVE>
+  <PM_LANGUAGE><![CDATA[]]></PM_LANGUAGE>
+ </settings>
+ <removed value=";"/>
+ <added value=""/>
+ <lastopfiles>
+  <file name="C:\Users\yovan\Desktop\cine_web\app.py"/>
+  <lastactivefile name=""/>
+ </lastopfiles>
+ <todoblock>
+  <todofile name="C:\Users\yovan\Desktop\cine_web\app.py">
+   <todo name="todo corre y la base existe." pos="42;61"/>
+  </todofile>
+  <todofile name="C:\Users\yovan\Desktop\cine_web\venv\Lib\site-packages\blinker\base.py">
+   <todo name="TODO no explanation or test for this" pos="2;134"/>
+   <todo name="TODO: test receivers_for(ANY)" pos="2;335"/>
+  </todofile>
+  <todofile name="C:\Users\yovan\Desktop\cine_web\venv\Lib\site-packages\click\_termui_impl.py">
+   <todo name="TODO: This never terminates if the passed generator never terminates." pos="2;524"/>
+  </todofile>
+  <todofile name="C:\Users\yovan\Desktop\cine_web\venv\Lib\site-packages\itsdangerous\timed.py">
+   <todo name="TODO: Signature is incompatible because parameters were added" pos="2;181"/>
+  </todofile>
+  <todofile name="C:\Users\yovan\Desktop\cine_web\venv\Lib\site-packages\jinja2\ext.py">
+   <todo name="TODO: the i18n extension is currently reevaluating values in a few" pos="2;250"/>
+  </todofile>
+  <todofile name="C:\Users\yovan\Desktop\cine_web\venv\Lib\site-packages\pip\_internal\cache.py">
+   <todo name="TODO: use DirectUrl.equivalent when" pos="2;279"/>
+  </todofile>
+  <todofile name="C:\Users\yovan\Desktop\cine_web\venv\Lib\site-packages\pip\_internal\cli\base_command.py">
+   <todo name="TODO: Try to get these passing down from the command?" pos="2;208"/>
+  </todofile>
+  <todofile name="C:\Users\yovan\Desktop\cine_web\venv\Lib\site-packages\pip\_internal\commands\inspect.py">
+   <todo name="TODO tags? scheme?" pos="2;59"/>
+  </todofile>
+  <todofile name="C:\Users\yovan\Desktop\cine_web\venv\Lib\site-packages\pip\_internal\index\collector.py">
+   <todo name="TODO: In the future, it would be nice if pip supported PEP 691" pos="2;338"/>
+  </todofile>
+  <todofile name="C:\Users\yovan\Desktop\cine_web\venv\Lib\site-packages\pip\_internal\metadata\base.py">
+   <todo name="TODO: Move definition here." pos="52;31"/>
+   <todo name="TODO: this property is relatively costly to compute, memoize it ?" pos="2;161"/>
+   <todo name="TODO: get project location from second line of egg_link file" pos="2;171"/>
+  </todofile>
+  <todofile name="C:\Users\yovan\Desktop\cine_web\venv\Lib\site-packages\pip\_internal\models\installation_report.py">
+   <todo name="TODO: currently, the resolver uses the default environment to evaluate" pos="2;50"/>
+  </todofile>
+  <todofile name="C:\Users\yovan\Desktop\cine_web\venv\Lib\site-packages\pip\_internal\models\selection_prefs.py">
+   <todo name="TODO: This needs Python 3.10's improved slots support for dataclasses" pos="2;5"/>
+  </todofile>
+  <todofile name="C:\Users\yovan\Desktop\cine_web\venv\Lib\site-packages\pip\_internal\network\lazy_wheel.py">
+   <todo name="TODO: Get range requests to be correctly cached" pos="2;176"/>
+  </todofile>
+  <todofile name="C:\Users\yovan\Desktop\cine_web\venv\Lib\site-packages\pip\_internal\operations\prepare.py">
+   <todo name="TODO: separate this part out from RequirementPreparer when the v1" pos="2;561"/>
+  </todofile>
+  <todofile name="C:\Users\yovan\Desktop\cine_web\venv\Lib\site-packages\pip\_internal\req\constructors.py">
+   <todo name="TODO: The is_installable_dir test here might not be necessary" pos="2;286"/>
+  </todofile>
+  <todofile name="C:\Users\yovan\Desktop\cine_web\venv\Lib\site-packages\pip\_internal\req\req_file.py">
+   <todo name="TODO: replace this with slots=True when dropping Python 3.9 support." pos="2;103"/>
+   <todo name="TODO: handle space after '\'." pos="2;522"/>
+  </todofile>
+  <todofile name="C:\Users\yovan\Desktop\cine_web\venv\Lib\site-packages\pip\_internal\resolution\resolvelib\candidates.py">
+   <todo name="TODO performance: this means we iterate the dependencies at least twice," pos="2;229"/>
+   <todo name="TODO: Supply reason based on force_reinstall and upgrade_strategy." pos="2;364"/>
+  </todofile>
+  <todofile name="C:\Users\yovan\Desktop\cine_web\venv\Lib\site-packages\pip\_internal\resolution\resolvelib\factory.py">
+   <todo name="TODO: Check already installed candidate, and use it if the link and" pos="2;193"/>
+   <todo name="TODO: Are there more cases this needs to return True? Editable?" pos="2;612"/>
+  </todofile>
+  <todofile name="C:\Users\yovan\Desktop\cine_web\venv\Lib\site-packages\pip\_vendor\cachecontrol\controller.py">
+   <todo name="TODO: There is an assumption that the result will be a" pos="2;226"/>
+  </todofile>
+  <todofile name="C:\Users\yovan\Desktop\cine_web\venv\Lib\site-packages\pip\_vendor\cachecontrol\filewrapper.py">
+   <todo name="TODO: Add some logging here..." pos="2;66"/>
+  </todofile>
+  <todofile name="C:\Users\yovan\Desktop\cine_web\venv\Lib\site-packages\pip\_vendor\distlib\util.py">
+   <todo name="TODO check k, v for valid values" pos="2;400"/>
+  </todofile>
+  <todofile name="C:\Users\yovan\Desktop\cine_web\venv\Lib\site-packages\pip\_vendor\msgpack\fallback.py">
+   <todo name="TODO should we eliminate the recursion?" pos="2;498"/>
+   <todo name="TODO check whether we need to call `list_hook`" pos="2;502"/>
+   <todo name="TODO is the interaction between `list_hook` and `use_list` ok?" pos="2;510"/>
+   <todo name="TODO check whether we need to call hooks" pos="2;515"/>
+  </todofile>
+  <todofile name="C:\Users\yovan\Desktop\cine_web\venv\Lib\site-packages\pip\_vendor\packaging\metadata.py">
+   <todo name="TODO: The spec doesn't say anything about if the keys should be" pos="2;203"/>
+   <todo name="TODO 2.1: can be in body" pos="56;804"/>
+  </todofile>
+  <todofile name="C:\Users\yovan\Desktop\cine_web\venv\Lib\site-packages\pip\_vendor\packaging\requirements.py">
+   <todo name="TODO: Can we test whether something is contained within a requirement?" pos="2;28"/>
+   <todo name="TODO: Can we normalize the name and extra name?" pos="2;31"/>
+  </todofile>
+  <todofile name="C:\Users\yovan\Desktop\cine_web\venv\Lib\site-packages\pip\_vendor\packaging\tags.py">
+   <todo name="TODO: Need to care about 32-bit PPC for ppc64 through 10.2?" pos="2;377"/>
+  </todofile>
+  <todofile name="C:\Users\yovan\Desktop\cine_web\venv\Lib\site-packages\pip\_vendor\pkg_resources\__init__.py">
+   <todo name="TODO: Add Generic type annotations to initialized collections." pos="2;0"/>
+   <todo name="TODO / Incomplete: A readable file-like object" pos="23;121"/>
+   <todo name="TODO: remove this except clause when python/cpython#103632 is fixed." pos="2;3307"/>
+   <todo name="TODO: Add a deadline?" pos="2;3597"/>
+  </todofile>
+  <todofile name="C:\Users\yovan\Desktop\cine_web\venv\Lib\site-packages\pip\_vendor\pygments\lexers\python.py">
+   <todo name="TODO: DelegatingLexer should support this" pos="21;714"/>
+  </todofile>
+  <todofile name="C:\Users\yovan\Desktop\cine_web\venv\Lib\site-packages\pip\_vendor\requests\adapters.py">
+   <todo name="TODO: Remove this in 3.0.0: see #2811" pos="2;685"/>
+  </todofile>
+  <todofile name="C:\Users\yovan\Desktop\cine_web\venv\Lib\site-packages\pip\_vendor\requests\hooks.py">
+   <todo name="TODO: response is the only one" pos="2;18"/>
+  </todofile>
+  <todofile name="C:\Users\yovan\Desktop\cine_web\venv\Lib\site-packages\pip\_vendor\rich\text.py">
+   <todo name="TODO: This is a little inefficient, it is only used by full justify" pos="2;561"/>
+  </todofile>
+  <todofile name="C:\Users\yovan\Desktop\cine_web\venv\Lib\site-packages\pip\_vendor\truststore\_macos.py">
+   <todo name="TODO: Not sure if we need the SecTrustResultType for anything?" pos="2;557"/>
+  </todofile>
+  <todofile name="C:\Users\yovan\Desktop\cine_web\venv\Lib\site-packages\pip\_vendor\urllib3\connection.py">
+   <todo name="TODO: Fix tunnel so it doesn't depend on self.sock state." pos="2;198"/>
+  </todofile>
+  <todofile name="C:\Users\yovan\Desktop\cine_web\venv\Lib\site-packages\pip\_vendor\urllib3\connectionpool.py">
+   <todo name="TODO: Add optional support for socket.gethostbyname checking." pos="2;521"/>
+  </todofile>
+  <todofile name="C:\Users\yovan\Desktop\cine_web\venv\Lib\site-packages\pip\_vendor\urllib3\contrib\securetransport.py">
+   <todo name="TODO: should I do clean shutdown here? Do I have to?" pos="2;658"/>
+   <todo name="TODO: Well, crap." pos="2;818"/>
+   <todo name="TODO: Update in line with above." pos="2;828"/>
+  </todofile>
+  <todofile name="C:\Users\yovan\Desktop\cine_web\venv\Lib\site-packages\pip\_vendor\urllib3\exceptions.py">
+   <todo name="TODO(t-8ch): Stop inheriting from AssertionError in v2.0." pos="2;288"/>
+  </todofile>
+  <todofile name="C:\Users\yovan\Desktop\cine_web\venv\Lib\site-packages\pip\_vendor\urllib3\util\retry.py">
+   <todo name="TODO: In v2 we can remove this sentinel and metaclass with deprecated options." pos="2;30"/>
+   <todo name="TODO: Deprecated, remove in v2.0" pos="2;260"/>
+   <todo name="TODO: If already given in **kw we use what's given to us" pos="2;322"/>
+   <todo name="TODO: For now favor if the Retry implementation sets its own method_whitelist" pos="2;453"/>
+   <todo name="TODO: Remove this deprecated alias in v2.0" pos="2;607"/>
+  </todofile>
+  <todofile name="C:\Users\yovan\Desktop\cine_web\venv\Lib\site-packages\pip\_vendor\urllib3\util\url.py">
+   <todo name="TODO: Remove this when we break backwards compatibility." pos="2;401"/>
+  </todofile>
+  <todofile name="C:\Users\yovan\Desktop\cine_web\venv\Lib\site-packages\werkzeug\http.py">
+   <todo name="TODO Remove encoding dance, it seems like clients accept UTF-8 keys" pos="2;1342"/>
+  </todofile>
+ </todoblock>
+ <dbgurls/>
+ <lasttime value="1754873252"/>
+</project>
