@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Pago aprobado</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body{font-family:Arial, sans-serif; background:#0b1020; color:#e5e7eb; margin:0; min-height:100vh; display:grid; place-items:center}
+    .card{width:min(720px,92vw); background:#111827; border:1px solid #1f2937; border-radius:14px; padding:24px; box-shadow:0 20px 50px rgba(0,0,0,.45)}
+    .row{display:grid; grid-template-columns:1fr 1fr; gap:6px 16px}
+    .row div{padding:6px 0}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace}
+    .actions{display:flex; gap:12px; margin-top:14px; justify-content:flex-end}
+    a{padding:10px 14px; border-radius:10px; border:1px solid #1f2937; background:#0b1222; color:#e5e7eb; text-decoration:none}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Pago aprobado</h1>
+    <div class="row">
+      <div><strong>Transacción:</strong></div><div class="mono">#{{ trx_id }}</div>
+      <div><strong>Monto:</strong></div><div class="mono">$ {{ monto }}</div>
+      <div><strong>Tarjeta:</strong></div><div>{{ brand }} **** {{ last4 }}</div>
+      <div><strong>Fecha:</strong></div><div class="mono">{{ fecha }}</div>
+      <div><strong>Autorización:</strong></div><div class="mono">{{ auth_code }}</div>
+      <div><strong>Código de compra:</strong></div><div class="mono">{{ codigo_compra }}</div>
+    </div>
+    <div style="margin-top:14px">
+      <img src="{{ qr_file }}" alt="QR comprobante" style="width:180px;height:180px;image-rendering:pixelated;">
+      <div class="mono" style="margin-top:8px;">{{ codigo_compra }}</div>
+    </div>
+    <div class="actions">
+      <a href="{{ qr_file }}" download>Descargar QR</a>
+      <a href="/">Inicio</a>
+    </div>
+  </div>
+</body>
+</html>
+

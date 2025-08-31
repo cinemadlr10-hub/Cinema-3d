@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Transacciones</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root { --bg:#0b1020; --card:#111827; --mut:#94a3b8; --txt:#e5e7eb; --brd:#1f2937; }
+    * { box-sizing:border-box }
+    body{font-family:Arial,sans-serif; background:var(--bg); color:var(--txt); margin:0; min-height:100vh; padding:24px}
+    .wrap{max-width:1100px; margin:0 auto}
+    h1{margin:0 0 12px}
+    .bar{display:flex; gap:12px; align-items:center; margin-bottom:12px}
+    a.btn{padding:10px 12px; border-radius:10px; border:1px solid var(--brd); background:#0b1222; color:var(--txt); text-decoration:none}
+    .card{background:var(--card); border:1px solid var(--brd); border-radius:12px; overflow:hidden}
+    table{width:100%; border-collapse:collapse}
+    th, td{padding:10px 12px; border-bottom:1px solid #1f2937; text-align:left; font-size:.95rem}
+    th{color:var(--mut); background:#0e1426; position:sticky; top:0}
+    tr:hover td{background:#0c1224}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace}
+    .chip{display:inline-block; padding:2px 8px; border-radius:999px; font-size:.8rem; border:1px solid var(--brd); background:#0b1222}
+    .qr{width:44px; height:44px; object-fit:contain; border:1px solid #1f2937; border-radius:6px; background:#0b1222}
+    .empty{padding:18px; color:var(--mut)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="bar">
+      <h1 style="flex:1">Transacciones</h1>
+      <a class="btn" href="/">Inicio</a>
+      <a class="btn" href="/pago">Nuevo pago</a>
+    </div>
+
+    <div class="card">
+      {% if not transacciones %}
+        <div class="empty">No hay transacciones.</div>
+      {% else %}
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Fecha</th>
+              <th>Email</th>
+              <th>Monto</th>
+              <th>Tarjeta</th>
+              <th>Venc.</th>
+              <th>Estado</th>
+              <th>Auth</th>
+              <th>QR</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for t in transacciones %}
+              <tr>
+                <td class="mono">#{{ t.id }}</td>
+                <td class="mono">{{ t.fecha }}</td>
+                <td>{{ t.email or '-' }}</td>
+                <td class="mono">{{ t.monto }}</td>
+                <td>{{ t.brand }} **** {{ t.last4 }}</td>
+                <td class="mono">{{ t.exp }}</td>
+                <td><span class="chip">{{ t.estado }}</span></td>
+                <td class="mono">{{ t.auth }}</td>
+                <td>
+                  {% if t.qr_url %}
+                    <a href="{{ t.qr_url }}" download title="Descargar QR">
+                      <img class="qr" src="{{ t.qr_url }}" alt="QR">
+                    </a>
+                  {% else %}
+                    -
+                  {% endif %}
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% endif %}
+    </div>
+  </div>
+</body>
+</html>
