@@ -1,0 +1,11 @@
+[
+  {
+    "id": "M01",
+    "titulo": "Galaxia X",
+    "poster_url": "https://via.placeholder.com/600x900?text=Galaxia+X",
+    "sinopsis": "Aventura espacial al borde de la galaxia.",
+    "duracion_min": 128,
+    "clasificacion": "+13",
+    "genero": "Sci-Fi"
+  }
+]

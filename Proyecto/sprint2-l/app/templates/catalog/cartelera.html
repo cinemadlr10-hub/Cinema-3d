@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Cartelera</h2>
+  <div class="grid-catalog">
+    {% for m in movies %}
+      <article class="movie-card">
+        <img class="movie-card__img" src="{{ m.poster_url }}" alt="{{ m.titulo }}"
+             onerror="this.src='https://via.placeholder.com/300x440?text=Poster'">
+        <div class="movie-card__body">
+          <h3 class="movie-card__title">{{ m.titulo }}</h3>
+          <p class="movie-card__meta">
+            {{ m.genero }}{% if m.duracion_min %} • {{ m.duracion_min }} min{% endif %}
+            {% if m.clasificacion %} • {{ m.clasificacion }}{% endif %}
+          </p>
+          <div class="showtimes">
+            {% for st in showtimes_by_movie.get(m.id, []) %}
+              <a class="chip" href="/showtimes/{{ st.id }}/seats">{{ st.inicio[11:16] }} • {{ st.sala }}</a>
+            {% else %}
+              <span class="chip chip--muted">Próximamente</span>
+            {% endfor %}
+          </div>
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+{% endblock %}

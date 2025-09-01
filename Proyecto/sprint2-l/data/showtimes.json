@@ -1,0 +1,9 @@
+[
+  {
+    "id": "TEST123",
+    "movie_id": "M01",
+    "pelicula": "Galaxia X",
+    "sala": "Sala 2",
+    "inicio": "2025-09-01T21:30:00"
+  }
+]

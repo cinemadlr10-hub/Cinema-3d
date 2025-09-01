@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="card">
+    <div class="toolbar">
+      <div>
+        <h2 style="margin:0 0 4px 0">{{ show.pelicula }} — {{ show.sala }}</h2>
+        <small style="color:var(--muted)">Función: {{ show.id }} • Inicio: {{ show.inicio }}</small>
+      </div>
+      <div>
+        <button id="btnConfirm" class="btn">Continuar (0)</button>
+      </div>
+    </div>
+
+    <div class="legend" style="margin: 8px 0 16px 0">
+      <span class="pill"><span class="dot free"></span>Libre</span>
+      <span class="pill"><span class="dot occupied"></span>Ocupada</span>
+      <span class="pill"><span class="dot locked"></span>Bloqueada</span>
+      <span class="pill"><span class="dot selected"></span>Seleccionada</span>
+    </div>
+
+    <div class="screen">Pantalla</div>
+
+    <div class="grid">
+      {% for row_label in row_labels %}
+        <div class="row">
+          <div class="row-label">{{ row_label }}</div>
+          {% for c in range(1, cols+1) %}
+            {% set seat_id = row_label ~ c %}
+            {% set state = "free" %}
+            {% if seat_id in occupied %}
+              {% set state = "occupied" %}
+            {% elif seat_id in locked %}
+              {% set state = "locked" %}
+            {% endif %}
+            <button
+              class="seat seat--{{ state }}"
+              data-seat="{{ seat_id }}"
+              {% if state != "free" %}disabled{% endif %}
+              aria-label="Asiento {{ seat_id }} estado {{ state }}"
+            >
+              {{ c }}
+            </button>
+          {% endfor %}
+        </div>
+      {% endfor %}
+    </div>
+
+    <div id="msg" style="margin-top:12px;color:var(--muted)"></div>
+  </div>
+
+  <script id="page-config" type="application/json">
+  {
+    "showtime_id": "{{ show.id }}",
+    "max": {{ max_seats|default(6) }}
+  }
+  </script>
+
+  <script>
+    (() => {
+      const cfgEl = document.getElementById("page-config");
+      let CFG = { showtime_id: null, max: 6 };
+      try { if (cfgEl) CFG = JSON.parse(cfgEl.textContent); } catch(_) {}
+      const showtimeId = CFG.showtime_id;
+      const MAX = CFG.max;
+
+      const btn = document.getElementById("btnConfirm");
+      const msg = document.getElementById("msg");
+      const grid = document.querySelector(".grid");
+      let selected = new Set();
+
+      function setSeatState(el, state) {
+        el.classList.remove("seat--free","seat--occupied","seat--locked","seat--selected");
+        el.classList.add("seat--" + state);
+        el.disabled = state !== "free" && state !== "selected";
+      }
+
+      function updateBtn() {
+        const n = selected.size;
+        btn.textContent = `Continuar (${n}/${MAX})`;
+        btn.disabled = n === 0 || n > MAX || btn.dataset.loading === "1";
+      }
+
+      grid.addEventListener("click", (ev) => {
+        const el = ev.target.closest(".seat");
+        if (!el) return;
+        if (el.classList.contains("seat--occupied") || el.classList.contains("seat--locked")) return;
+
+        const code = el.dataset.seat;
+        if (el.classList.contains("seat--selected")) {
+          selected.delete(code);
+          setSeatState(el, "free");
+        } else {
+          if (selected.size >= MAX) return;
+          selected.add(code);
+          setSeatState(el, "selected");
+        }
+        updateBtn();
+      });
+
+      btn.addEventListener("click", async () => {
+        if (selected.size === 0 || selected.size > MAX) return;
+        btn.dataset.loading = "1";
+        updateBtn();
+        msg.style.color = "var(--muted)";
+        msg.textContent = "Enviando reserva...";
+
+        try {
+          const res = await fetch("/reservations", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ showtime_id: showtimeId, seats: Array.from(selected) })
+          });
+          const data = await res.json();
+          if (res.status === 201) {
+            msg.style.color = "var(--text)";
+            msg.textContent = `✅ Reserva creada: ${data.reservation_id}. Bloqueo por ${data.ttl} s.`;
+            selected.clear();
+            updateBtn();
+            await refreshState();
+          } else if (res.status === 409) {
+            msg.style.color = "var(--bad)";
+            msg.textContent = `⚠️ Asientos en conflicto: ${data.conflicted.join(", ")}. Recargá la página o reintentá.`;
+            await refreshState();
+          } else {
+            msg.style.color = "var(--bad)";
+            msg.textContent = "Error: " + (data.error || res.status);
+          }
+        } catch (err) {
+          msg.style.color = "var(--bad)";
+          msg.textContent = "Error de red: " + err.message;
+        } finally {
+          btn.dataset.loading = "0";
+          updateBtn();
+        }
+      });
+
+      async function refreshState() {
+        try {
+          const r = await fetch(`/api/showtimes/${showtimeId}/seats`, { cache: "no-store" });
+          if (!r.ok) return;
+          const st = await r.json();
+          const occupied = new Set(st.occupied || []);
+          const locked = new Set(st.locked || []);
+
+          document.querySelectorAll("[data-seat]").forEach((el) => {
+            if (el.classList.contains("seat--selected")) return;
+            const code = el.dataset.seat;
+            if (occupied.has(code)) return setSeatState(el, "occupied");
+            if (locked.has(code))   return setSeatState(el, "locked");
+            setSeatState(el, "free");
+          });
+        } catch (_) { /* noop */ }
+      }
+      setInterval(refreshState, 3000);
+      refreshState();
+
+      updateBtn();
+    })();
+  </script>
+{% endblock %}

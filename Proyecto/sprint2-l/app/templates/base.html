@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cinema3D • Sprint 2 (HU03)</title>
+    <link rel="stylesheet" href="/static/css/seats.css">
+    <style>
+      :root { --bg: #0f172a; --card:#111827; --muted:#94a3b8; --ok:#10b981; --warn:#f59e0b; --bad:#ef4444; --sel:#3b82f6; --text:#e5e7eb }
+      body { background: var(--bg); color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, sans-serif; margin:0; }
+      .container { max-width: 1000px; margin: 0 auto; padding: 24px; }
+      .card { background: var(--card); border-radius: 14px; padding: 16px; box-shadow: 0 10px 25px rgba(0,0,0,.2); }
+      a { color: var(--sel); text-decoration: none; }
+      .btn { background: var(--sel); border: none; color: white; padding: 10px 16px; border-radius: 10px; cursor: pointer; font-weight: 600; }
+      .btn[disabled] { opacity: .6; cursor: not-allowed; }
+      .legend { display:flex; gap:12px; align-items:center; flex-wrap:wrap; font-size:14px; color:var(--muted); }
+      .legend .pill{ display:inline-flex; align-items:center; gap:6px; padding:8px 10px; background:#0b1220; border-radius:8px; }
+      .dot{ width:12px; height:12px; border-radius:3px; display:inline-block; }
+      .dot.free{ background: var(--ok); }
+      .dot.locked{ background: var(--warn); }
+      .dot.occupied{ background: var(--bad); }
+      .dot.selected{ background: var(--sel); }
+      .toolbar { display:flex; justify-content:space-between; align-items:center; margin-bottom: 12px;}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      {% block content %}{% endblock %}
+    </div>
+  </body>
+</html>
