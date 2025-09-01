@@ -1,0 +1,38 @@
+
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CINEMA3D</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+<header>
+  <h1>CINEMA3D · Productos y Combos <small style='color:#9cf'></small></h1>
+  <nav>
+  <a href="{{ url_for('listar_productos') }}">Productos</a>
+  <a href="{{ url_for('listar_combos') }}">Combos</a>
+  <a href="{{ url_for('ver_carrito') }}">Carrito</a>
+  </nav>
+</header>
+
+<main>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <ul class="flash">
+        {% for category, msg in messages %}
+          <li class="{{ category }}">{{ msg }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+
+  {% block content %}{% endblock %}
+</main>
+
+<footer>
+  <small>Demo Sprint 2 · Flask</small>
+</footer>
+</body>
+</html>
