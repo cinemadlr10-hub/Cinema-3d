@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>{% block title %}{{ title or "CINEMA3D" }}{% endblock %}</title>
+
+  <!-- CSS del tema original -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
+
+  <!-- Estilos mínimos para flashes (por si tu main.css no los define) -->
+  <style>
+    .flash-stack { margin: 1rem 0 1.25rem 0; }
+    .flash {
+      padding: .75rem 1rem; border-radius: 10px; margin-bottom: .5rem;
+      background: #1e293b; color: #e5e7eb; border: 1px solid rgba(255,255,255,.1);
+      box-shadow: 0 8px 20px rgba(0,0,0,.18);
+    }
+    .flash-success { border-color: rgba(34,197,94,.45); }
+    .flash-info    { border-color: rgba(59,130,246,.45); }
+    .flash-warning { border-color: rgba(234,179,8,.55); }
+    .flash-error, .flash-danger { border-color: rgba(239,68,68,.55); }
+  </style>
+
+  {# Bloque opcional para inyectar CSS/HEAD extra desde vistas #}
+  {% block head_extras %}{% endblock %}
+</head>
+<body>
+
+  {# Parcial opcional de navegación (no falla si no existe) #}
+  {% include "_partials/navbar.html" ignore missing %}
+
+  <main class="container">
+    {# Mensajes flash de Flask (success/info/warning/error) #}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-stack">
+          {% for category, message in messages %}
+            <div class="flash flash-{{ category|lower }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer">CINEMA3D LA RIOJA</footer>
+
+  {# Bloque opcional para scripts de página (se cargan al final del body) #}
+  {% block scripts %}{% endblock %}
+</body>
+</html>

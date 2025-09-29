@@ -1,0 +1,83 @@
+[2025-09-17 01:32:38,497] WARNING in db: No se pudo crear índice idx_seat_holds_token: no such column: token
+[2025-09-17 01:37:08,140] WARNING in db: Migración seat_reservas: no such column: token
+[2025-09-17 01:37:43,212] WARNING in db: Migración seat_reservas: no such column: token
+[2025-09-28 22:13:18,309] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-28 22:13:54,641] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-28 22:13:59,853] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-28 22:14:05,993] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-28 22:14:12,023] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-28 22:14:17,702] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-28 22:14:20,135] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-28 22:14:29,737] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-28 22:45:03,526] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-28 22:45:06,007] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-28 22:45:07,143] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-28 22:49:34,841] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-28 22:50:04,063] INFO in venta: Cartelera: 3 películas para sucursal=Cine San Martín 62
+[2025-09-28 22:50:40,754] INFO in venta: Cartelera: 3 películas para sucursal=Cine San Martín 62
+[2025-09-28 22:51:12,922] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-28 22:51:49,270] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-28 22:57:11,429] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-28 22:57:15,768] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-28 23:12:08,274] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-28 23:15:59,018] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-28 23:17:55,687] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-28 23:18:04,458] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-28 23:20:33,845] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-28 23:21:52,110] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-28 23:27:20,112] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-28 23:34:49,341] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-28 23:36:42,798] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-28 23:37:50,316] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-28 23:41:28,300] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-28 23:51:37,931] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-29 00:01:08,835] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-29 00:03:25,136] INFO in emailer: Email enviado a espinosaclaribel00@gmail.com (asunto=Comprobante TRX #2)
+[2025-09-29 00:12:35,936] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-29 00:19:43,195] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-29 00:20:47,144] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-29 00:29:35,752] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-29 00:30:51,853] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-29 00:30:59,768] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-29 00:40:51,721] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-29 00:48:03,026] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-29 00:53:56,871] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-29 00:58:01,680] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-29 00:58:07,329] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-29 01:02:39,917] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-29 01:02:49,503] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-29 01:03:43,808] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-29 01:05:58,311] ERROR in venta: Error al cargar películas desde BD: 'sqlite3.Row' object has no attribute 'get'
+[2025-09-29 01:05:58,311] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-29 01:07:29,406] ERROR in venta: Error al cargar películas desde BD: 'sqlite3.Row' object has no attribute 'get'
+[2025-09-29 01:07:29,406] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-29 01:14:18,919] ERROR in venta: Error al cargar películas desde BD: 'sqlite3.Row' object has no attribute 'get'
+[2025-09-29 01:14:18,919] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-29 01:14:40,418] ERROR in venta: Error al cargar películas desde BD: 'sqlite3.Row' object has no attribute 'get'
+[2025-09-29 01:14:40,419] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-29 01:14:49,147] ERROR in venta: Error al cargar películas desde BD: 'sqlite3.Row' object has no attribute 'get'
+[2025-09-29 01:14:49,147] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-29 01:15:15,348] ERROR in venta: Error al cargar películas desde BD: 'sqlite3.Row' object has no attribute 'get'
+[2025-09-29 01:15:15,349] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-29 01:15:27,477] ERROR in venta: Error al cargar películas desde BD: 'sqlite3.Row' object has no attribute 'get'
+[2025-09-29 01:15:27,477] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-29 01:15:36,936] ERROR in venta: Error al cargar películas desde BD: 'sqlite3.Row' object has no attribute 'get'
+[2025-09-29 01:15:36,936] INFO in venta: Cartelera: 3 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-29 01:15:41,838] ERROR in venta: Error al cargar películas desde BD: 'sqlite3.Row' object has no attribute 'get'
+[2025-09-29 01:15:41,838] INFO in venta: Cartelera: 3 películas para sucursal=Cine San Martín 62
+[2025-09-29 01:15:46,615] ERROR in venta: Error al cargar películas desde BD: 'sqlite3.Row' object has no attribute 'get'
+[2025-09-29 01:18:14,941] INFO in venta: Cartelera: 4 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-29 01:18:56,708] INFO in venta: Cartelera: 4 películas para sucursal=Cine San Martín 62
+[2025-09-29 01:19:01,048] INFO in venta: Cartelera: 4 películas para sucursal=Cine San Martín 62
+[2025-09-29 01:19:16,523] INFO in venta: Cartelera: 4 películas para sucursal=Cine San Martín 62
+[2025-09-29 01:19:46,664] INFO in venta: Cartelera: 3 películas para sucursal=Cine San Martín 62
+[2025-09-29 01:19:56,373] INFO in venta: Cartelera: 3 películas para sucursal=Cine San Martín 62
+[2025-09-29 01:20:07,434] INFO in venta: Cartelera: 3 películas para sucursal=Cine San Martín 62
+[2025-09-29 01:20:27,849] INFO in venta: Cartelera: 3 películas para sucursal=Cine San Martín 62
+[2025-09-29 01:20:39,712] INFO in venta: Cartelera: 3 películas para sucursal=Cine San Martín 62
+[2025-09-29 01:20:44,080] INFO in venta: Cartelera: 3 películas para sucursal=Cine San Martín 62
+[2025-09-29 01:20:50,242] INFO in venta: Cartelera: 3 películas para sucursal=Cine San Martín 62
+[2025-09-29 01:20:56,148] INFO in venta: Cartelera: 3 películas para sucursal=Cine San Martín 62
+[2025-09-29 01:21:32,384] INFO in venta: Cartelera: 2 películas para sucursal=Cine San Martín 62
+[2025-09-29 01:21:44,675] INFO in venta: Cartelera: 2 películas para sucursal=Cine Pelagio B. Luna 960
+[2025-09-29 01:22:03,512] INFO in venta: Cartelera: 2 películas para sucursal=Cine Pelagio B. Luna 960

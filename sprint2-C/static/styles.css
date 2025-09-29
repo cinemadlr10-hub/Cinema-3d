@@ -1,0 +1,365 @@
+
+/* --- Productos Mejorados y Limpieza de CSS --- */
+.productos-title {
+	font-size: 2.1rem;
+	font-weight: 700;
+	margin-bottom: 18px;
+	letter-spacing: 0.5px;
+}
+.productos-form {
+	margin-top: 10px;
+}
+.categoria-title {
+	font-size: 1.3rem;
+	margin: 28px 0 12px 0;
+	font-weight: 700;
+	letter-spacing: 0.5px;
+	padding-left: 6px;
+	position: relative;
+}
+.categoria-title.bebidas {
+	color: #4fc3f7;
+	text-shadow: 0 2px 8px #1a6cae44;
+}
+.categoria-title.pochoclos {
+	color: #ffe066;
+	text-shadow: 0 2px 8px #bfae1a44;
+}
+.categoria-title.golosinas {
+	color: #ffb3c6;
+	text-shadow: 0 2px 8px #b81a4444;
+}
+.productos-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+	gap: 32px;
+	margin-bottom: 18px;
+}
+.producto-card {
+	background: #101c2c;
+	border: 2px solid #22345a;
+	border-radius: 18px;
+	padding: 22px 20px 16px 20px;
+	box-shadow: 0 2px 12px #0003;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	min-height: 150px;
+	transition: box-shadow 0.2s, border-color 0.2s;
+	position: relative;
+}
+.producto-card:hover {
+	box-shadow: 0 4px 24px #1a2a4a44;
+	border-color: #3a6ee8;
+}
+.producto-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 2px;
+}
+.producto-nombre {
+	font-size: 1.15rem;
+	font-weight: 700;
+	color: #fff;
+}
+.producto-precio {
+	font-size: 1.08rem;
+	color: #ffe066;
+	font-weight: 600;
+	letter-spacing: 0.5px;
+}
+.producto-desc {
+	font-size: 1.01rem;
+	color: #b6c3d6;
+	margin-bottom: 4px;
+}
+.producto-cantidad {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-top: 4px;
+}
+.producto-cantidad label {
+	font-size: 1.01rem;
+	color: #e9eef6;
+}
+input[type="number"] {
+	width: 70px;
+	padding: 8px 10px;
+	border-radius: 10px;
+	border: 2px solid #2a3c66;
+	background: #0b1220;
+	color: #e9eef6;
+	font-size: 1.08rem;
+	text-align: center;
+	font-weight: 600;
+	outline: none;
+	transition: border-color 0.2s;
+}
+input[type="number"]:focus {
+	border-color: #3a6ee8;
+}
+.productos-actions {
+	margin-top: 18px;
+	justify-content: flex-end;
+	gap: 32px;
+}
+
+.productos-actions .btn-principal {
+	margin-right: 18px;
+}
+.btn-principal {
+	background: linear-gradient(90deg, #3a6ee8 60%, #1b2b4d 100%);
+	color: #fff;
+	border: none;
+	font-weight: 700;
+	font-size: 1.13rem;
+	padding: 13px 28px;
+	border-radius: 12px;
+	box-shadow: 0 2px 8px #1a2a4a22;
+	transition: filter 0.15s, box-shadow 0.2s;
+}
+.btn-principal:hover {
+	filter: brightness(1.13);
+	box-shadow: 0 4px 16px #3a6ee888;
+}
+.btn-secundario {
+	background: #1b2b4d;
+	color: #e9eef6;
+	border: 2px solid #29467a;
+	font-weight: 600;
+	font-size: 1.08rem;
+	padding: 13px 20px;
+	border-radius: 12px;
+	transition: filter 0.15s, box-shadow 0.2s;
+}
+.btn-secundario:hover {
+	filter: brightness(1.13);
+	box-shadow: 0 4px 16px #29467a88;
+}
+
+/* Resaltado de tarjetas según categoría */
+.producto-card.bebidas {
+	border-color: #4fc3f7;
+	box-shadow: 0 2px 16px #4fc3f733;
+}
+.producto-card.pochoclos {
+	border-color: #ffe066;
+	box-shadow: 0 2px 16px #ffe06633;
+}
+.producto-card.golosinas {
+	border-color: #ffb3c6;
+	box-shadow: 0 2px 16px #ffb3c633;
+}
+
+@media (max-width: 900px) {
+	.productos-grid {
+		grid-template-columns: 1fr;
+		gap: 18px;
+	}
+	.producto-card {
+		padding: 14px 8px 12px 8px;
+	}
+	.productos-title {
+		font-size: 1.3rem;
+	}
+}
+
+:root { font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif; }
+body { margin: 0; background: #0b1220; color: #e9eef6; }
+header { display:flex; justify-content:space-between; align-items:center; padding:14px 20px; background:#121a2b; border-bottom:1px solid #1e2a44; position:sticky; top:0; }
+header h1 { font-size: 1.1rem; margin:0; }
+nav a { color:#cfe1ff; margin-left:12px; text-decoration:none; padding:6px 10px; border:1px solid #2a3c66; border-radius:10px; }
+main { max-width: 980px; margin: 28px auto; padding: 0 16px; }
+footer { text-align:center; padding:20px; color:#98a2b3; }
+.card { background:#0f172a; border:1px solid #1f2a44; border-radius:14px; padding:16px; }
+table { width:100%; border-collapse: collapse; }
+th, td { text-align:left; padding:10px 8px; border-bottom:1px solid #1f2a44; vertical-align: middle; }
+th.right { text-align:right; }
+input[type="number"] { width: 80px; padding:6px 8px; border-radius:10px; border: 1px solid #2a3c66; background:#0b1220; color:#e9eef6; }
+.actions { display:flex; gap:10px; justify-content:flex-end; padding-top:12px; }
+button, .btn { cursor:pointer; padding:10px 12px; border-radius:10px; border:1px solid #29467a; background:#1b2b4d; color:#e9eef6; text-decoration:none; }
+button:hover, .btn:hover { filter:brightness(1.15); }
+.flash { list-style:none; padding:0; margin: 0 0 16px 0; }
+.flash li { margin: 6px 0; padding:8px 10px; border-radius:10px; }
+.flash .success { background:#0a3c2b; border:1px solid #116d51; }
+.flash .info { background:#0a2c3c; border:1px solid #11516d; }
+
+/* Mejoras combos */
+.combos-list { padding: 0; background: none; border: none; }
+/* --- Combos Mejorados --- */
+.combos-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+	gap: 32px;
+	margin-bottom: 18px;
+}
+.card-item {
+	background: #101c2c;
+	border: 2px solid #22345a;
+	border-radius: 18px;
+	padding: 24px 20px 18px 20px;
+	box-shadow: 0 2px 12px #0003;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	min-height: 210px;
+	transition: box-shadow 0.2s, border-color 0.2s;
+	position: relative;
+	align-items: flex-start;
+}
+.card-item:hover {
+	box-shadow: 0 4px 24px #1a2a4a44;
+	border-color: #3a6ee8;
+}
+.card-item strong {
+	font-size: 1.25rem;
+	font-weight: 700;
+	color: #fff;
+	margin-bottom: 6px;
+}
+.card-item small {
+	font-size: 1.05rem;
+	color: #b6c3d6;
+	margin-bottom: 10px;
+	display: block;
+	min-height: 38px;
+	line-height: 1.3;
+}
+.card-item span {
+	font-size: 1.13rem;
+	color: #ffe066;
+	font-weight: 600;
+	margin-bottom: 10px;
+	display: block;
+}
+.card-item label {
+	font-size: 1.05rem;
+	color: #e9eef6;
+	margin-top: 8px;
+}
+.card-item input[type="number"] {
+	width: 70px;
+	padding: 8px 10px;
+	border-radius: 10px;
+	border: 2px solid #2a3c66;
+	background: #0b1220;
+	color: #e9eef6;
+	font-size: 1.08rem;
+	text-align: center;
+	font-weight: 600;
+	outline: none;
+	transition: border-color 0.2s;
+	margin-left: 8px;
+}
+.card-item input[type="number"]:focus {
+	border-color: #3a6ee8;
+}
+.actions {
+	display: flex;
+	gap: 18px;
+	justify-content: center;
+	padding-top: 18px;
+}
+.actions button, .actions .btn {
+	background: linear-gradient(90deg, #3a6ee8 60%, #1b2b4d 100%);
+	color: #fff;
+	border: none;
+	font-weight: 700;
+	font-size: 1.13rem;
+	padding: 13px 28px;
+	border-radius: 12px;
+	box-shadow: 0 2px 8px #1a2a4a22;
+	transition: filter 0.15s, box-shadow 0.2s;
+}
+.actions button:hover, .actions .btn:hover {
+	filter: brightness(1.13);
+	box-shadow: 0 4px 16px #3a6ee888;
+}
+.combo-card {
+					display: grid;
+					grid-template-columns: 1fr 1fr;
+					grid-template-rows: 1fr 1fr;
+					gap: 40px 40px;
+					margin-bottom: 18px;
+					justify-content: center;
+					align-items: stretch;
+					width: 100%;
+					max-width: 900px;
+					margin-left: auto;
+					margin-right: auto;
+				}
+
+				@media (max-width: 900px) {
+					.combos-grid {
+						grid-template-columns: 1fr;
+						grid-template-rows: auto;
+						max-width: 500px;
+						gap: 32px;
+					}
+				}
+			}
+
+			@media (max-width: 900px) {
+				.combos-grid {
+					grid-template-columns: 1fr;
+					max-width: 500px;
+					gap: 32px;
+				}
+			}
+		}
+
+		@media (max-width: 900px) {
+			.combos-grid {
+				grid-template-columns: 1fr;
+				max-width: 500px;
+			}
+		}
+	}
+
+	@media (max-width: 900px) {
+		.combos-grid {
+			grid-template-columns: 1fr;
+			max-width: 500px;
+		}
+	}
+	box-shadow: 0 4px 24px #0004;
+}
+.combo-img {
+	width: 90px;
+	height: 90px;
+	object-fit: cover;
+	border-radius: 50%;
+	margin-bottom: 10px;
+	background: #0b1220;
+	border: 2px solid #29467a;
+}
+.combo-img.placeholder {
+	display: flex;
+	font-size: 2.7rem;
+	background: #1b2b4d;
+	color: #cfe1ff;
+}
+.combo-info h3 {
+	margin: 0 0 6px 0;
+	font-size: 1.15rem;
+}
+.combo-precio {
+	display: inline-block;
+	background: #29467a;
+	color: #fff;
+	border-radius: 8px;
+	padding: 2px 10px;
+	font-weight: bold;
+	margin-bottom: 8px;
+}
+.combo-info p {
+	margin: 0 0 8px 0;
+	color: #cfe1ff;
+	font-size: 0.98rem;
+}
+.combo-info label {
+	font-size: 0.97rem;
+	color: #e9eef6;
+}

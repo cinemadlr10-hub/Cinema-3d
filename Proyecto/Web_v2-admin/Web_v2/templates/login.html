@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Iniciar sesión{% endblock %}
+
+{% block content %}
+<div class="card-central" style="max-width: 560px; margin: 2.5rem auto; padding: 2rem;">
+  <h2 class="h2" style="text-align:center; margin-bottom: 1rem;">Iniciar sesión</h2>
+
+  {% if errores %}
+    <div class="card" style="border:1px solid rgba(239,68,68,.4); margin-bottom:1rem;">
+      <div class="card-body">
+        <ul style="margin:0; padding-left:1.2rem;">
+          {% for e in errores %}<li>{{ e }}</li>{% endfor %}
+        </ul>
+      </div>
+    </div>
+  {% endif %}
+
+  <form method="post" action="{{ url_for('auth.login') }}" class="grid" style="grid-template-columns:1fr; gap:14px;">
+    <input type="hidden" name="next" value="{{ next_url or url_for('venta.cartelera') }}"/>
+
+    <div class="form-field">
+      <label class="form-label">Email o DNI</label>
+      <input class="input" name="login_id" value="{{ login_id or '' }}" placeholder="tu@email.com o 12345678" required>
+    </div>
+
+    <div class="form-field">
+      <label class="form-label">Contraseña</label>
+      <input class="input" type="password" name="password" required>
+    </div>
+
+    <div class="form-field" style="display:flex; align-items:center; gap:.5rem;">
+      <input type="checkbox" id="recordarme" name="recordarme" value="1" style="width:auto;">
+      <label for="recordarme" class="form-label" style="margin:0;">Recordarme</label>
+    </div>
+
+    <div style="display:flex; gap:.75rem; justify-content:flex-end;">
+      <a class="btn btn-outline" href="{{ url_for('venta.cartelera') }}">Cancelar</a>
+      <button class="btn btn-primary" type="submit">Entrar</button>
+    </div>
+
+    <div style="text-align:center; margin-top:.5rem;">
+      ¿No tenés cuenta? <a href="{{ url_for('auth.registro') }}">Registrate</a>
+    </div>
+  </form>
+</div>
+{% endblock %}
