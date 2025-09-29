@@ -1,0 +1,206 @@
+{% extends "base.html" %}
+{% block title %}Pago de entradas{% endblock %}
+
+{% block head_extras %}
+<style>
+  :root{
+    --bg:#0b1020; --card:#0f172a; --mut:#94a3b8; --txt:#e5e7eb; --brd:#1f2937; --fx:#334155;
+    --btn:#1f6feb; --btnh:#2a7bff;
+  }
+  *{box-sizing:border-box}
+  /* Fondo local para esta vista (puede omitirse si preferís el global) */
+  body.pago-body{
+    background:linear-gradient(135deg,#0b1020 0%,#0b1328 100%);
+    color:var(--txt);
+    font-family:system-ui,Segoe UI,Arial,sans-serif
+  }
+  .wrap{width:min(880px,95vw); margin: 0 auto;}
+  .title{display:flex;align-items:center;gap:10px;margin:0 0 14px}
+  .title .pill{padding:4px 10px;border:1px solid #1f2937;border-radius:999px;background:#0b1222;color:#cbd5e1;font-size:.8rem}
+  .card{background:var(--card);border:1px solid var(--brd);border-radius:18px;padding:22px;box-shadow:0 25px 60px rgba(0,0,0,.45)}
+  .sub{margin:0 0 18px;color:var(--mut)}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 16px}
+  .full{grid-column:1/-1}
+  label{display:flex;align-items:center;gap:8px;color:#a5b4fc;font-weight:600;font-size:.9rem;margin:2px 0 6px}
+  .fld{position:relative}
+  input{
+    width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--brd);
+    background:#0b1222;color:#e5e7eb;font-size:1rem;transition:.2s
+  }
+  input:focus{
+    outline:none;border-color:var(--fx);background:#fff;color:#000;
+    box-shadow:0 0 0 3px rgba(51,65,85,.25)
+  }
+  .row-compact{display:flex;gap:10px;flex-wrap:wrap}
+  .xs{width:88px;padding:10px 12px;font-size:.95rem}
+  .sm{max-width:300px}
+  .actions{display:flex;gap:12px;justify-content:flex-end;margin-top:16px}
+  .btn{padding:12px 16px;border-radius:12px;border:1px solid #1f2937;background:#0b1222;color:#e5e7eb;text-decoration:none}
+  .btn:hover{box-shadow:0 0 0 3px rgba(51,65,85,.25)}
+  .btn-cta{background:var(--btn);border-color:transparent}
+  .btn-cta:hover{background:var(--btnh)}
+  #brand_icon svg{ width:32px;height:20px;display:block;background:#fff;border-radius:4px;padding:2px; }
+  @media (max-width:840px){
+    .grid{grid-template-columns:1fr}
+    .sm{max-width:100%}
+    .xs{width:100%}
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="wrap">
+  <div class="title">
+    <h1 style="margin:0;">Pago de entradas</h1>
+    <span class="pill">Seguro • Rápido</span>
+  </div>
+
+  <div class="card">
+    <p class="sub">Ingresá tus datos. Te enviaremos el comprobante con QR al email.</p>
+
+    <!-- OJO: endpoint dentro del blueprint -->
+    <form id="form-pago" method="POST" action="{{ url_for('pago.pago') }}" novalidate class="grid">
+      <!-- EMAIL -->
+      <div class="full fld">
+        <label for="email">Email (obligatorio)</label>
+        <input id="email" name="email" type="email" maxlength="30" autocomplete="email" required
+               value="{{ email|default('') }}">
+      </div>
+
+      <!-- MONTO -->
+      <div class="fld">
+        <label for="monto_view">Monto (ARS) *</label>
+        <input id="monto_view" class="sm" type="text" inputmode="decimal" placeholder="1.234,56" required>
+        <input id="monto" name="monto" type="hidden">
+      </div>
+
+      <!-- NOMBRE EN TARJETA -->
+      <div class="fld">
+        <label for="nombre_tarjeta">Nombre en la tarjeta *</label>
+        <input id="nombre_tarjeta" name="nombre_tarjeta" type="text"
+               minlength="2" maxlength="26" required autocomplete="cc-name"
+               pattern="[A-Za-zÁÉÍÓÚÜÑáéíóúüñ ]{2,26}"
+               value="{{ nombre_tarjeta|default('') }}">
+      </div>
+
+      <!-- NÚMERO DE TARJETA (con icono de marca) -->
+      <div class="full fld">
+        <label for="pan">
+          Número de tarjeta *
+          <span id="brand_icon"></span>
+        </label>
+        <input id="pan" name="pan" class="sm" type="text" inputmode="numeric" autocomplete="cc-number"
+               placeholder="XXXX XXXX XXXX XXXX" pattern="[\d\s]{19}" required>
+        <div style="color:#9ca3af;margin-top:6px;font-size:.9rem">
+          16 dígitos. Se agrupa automáticamente.
+        </div>
+      </div>
+
+      <!-- MES / AÑO / CVV -->
+      <div class="full row-compact">
+        <div class="fld">
+          <label for="exp_mes">Mes</label>
+          <input id="exp_mes" name="exp_mes" class="xs" type="text" inputmode="numeric"
+                 maxlength="2" placeholder="MM" required pattern="(0[1-9]|1[0-2])">
+        </div>
+
+        <div class="fld">
+          <label for="exp_anio">Año</label>
+          <input id="exp_anio" name="exp_anio" class="xs" type="text" inputmode="numeric"
+                 maxlength="4" placeholder="YYYY" required pattern="\d{4}">
+        </div>
+
+        <div class="fld">
+          <label for="cvv">CVV</label>
+          <input id="cvv" name="cvv" class="xs" type="password" inputmode="numeric"
+                 maxlength="3" placeholder="***" required pattern="\d{3}" autocomplete="cc-csc">
+        </div>
+      </div>
+
+      <!-- BOTONES -->
+      <div class="full actions">
+        <a class="btn" href="{{ url_for('main.bienvenida') }}">Inicio</a>
+        <button class="btn btn-cta" type="submit">Pagar</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  // ====== MONTO ======
+  const montoView = document.getElementById('monto_view');
+  const montoHidden = document.getElementById('monto');
+  const fmtARS = new Intl.NumberFormat('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+  function toCanonical(str){ return (str||'').replace(/\./g,'').replace(',', '.'); }
+  function formatARS(c){ const n=Number(c); return Number.isNaN(n)?'':fmtARS.format(n); }
+  function countDigitsUpTo(s,i){ return (s.slice(0,i).match(/\d/g)||[]).length; }
+  function caretFromDigits(t,d){ if(d<=0)return 0;let c=0;for(let i=0;i<t.length;i++){if(/\d/.test(t[i]))c++;if(c===d)return i+1}return t.length;}
+
+  montoView.addEventListener('input', e=>{
+    const el=e.target, old=el.value, sel=el.selectionStart;
+    let cleaned = old.replace(/[^\d.,]/g,'');
+    let c = toCanonical(cleaned);
+    const parts=c.split('.'); if(parts.length>2) c=parts[0]+'.'+parts.slice(1).join('');
+    let [ent,dec='']=c.split('.'); dec=dec.slice(0,2); c=ent+(dec?'.'+dec:'');
+
+    const digitsBefore=countDigitsUpTo(cleaned, Math.max(0,sel));
+    const formatted = c?formatARS(c):'';
+    el.value=formatted;
+    const pos=caretFromDigits(formatted,digitsBefore);
+    el.setSelectionRange(pos, pos);
+    montoHidden.value=c;
+  });
+
+  // ====== NOMBRE EN MAYÚSCULAS ======
+  const inputNombre=document.getElementById('nombre_tarjeta');
+  inputNombre.addEventListener('input', ()=>{
+    inputNombre.value=inputNombre.value.replace(/[^A-Za-zÁÉÍÓÚÜÑáéíóúüñ ]/g,'').toUpperCase();
+  });
+
+  // ====== CVV ======
+  const cvv=document.getElementById('cvv');
+  cvv.addEventListener('input', ()=>{ cvv.value=cvv.value.replace(/\D/g,'').slice(0,3); });
+
+  const expMes=document.getElementById('exp_mes');
+  const expAnio=document.getElementById('exp_anio');
+  expMes.addEventListener('input', ()=>{
+    expMes.value = expMes.value.replace(/\D/g,'').slice(0,2);
+    if (expMes.value.length===2){
+      let m = parseInt(expMes.value||'0',10);
+      if (m<1) m=1; if (m>12) m=12;
+      expMes.value = String(m).padStart(2,'0');
+      expAnio.focus();
+    }
+  });
+  expAnio.addEventListener('input', ()=>{
+    expAnio.value = expAnio.value.replace(/\D/g,'').slice(0,4);
+    if (expAnio.value.length===4) cvv.focus();
+  });
+
+  // ====== PAN + ICONOS ======
+  const pan=document.getElementById('pan');
+  const brandIcon=document.getElementById('brand_icon');
+
+  const icons={
+    VISA:`<svg viewBox="0 0 48 32"><path fill="#1a1f71" d="M22.3 22.9l2.6-13.8h4.2l-2.6 13.8zM34.5 9.1c-.8-.3-2-.6-3.5-.6-3.9 0-6.6 2-6.6 5 0 2.2 2 3.4 3.6 4.2 1.6.8 2.1 1.3 2.1 2 0 1.1-1.3 1.6-2.5 1.6-1.7 0-2.6-.3-4-.9l-.5-.2-.6 3.3c1 .4 2.8.7 4.7.7 4.4 0 7.2-2 7.2-5.1 0-1.7-1.1-3-3.4-4.2-1.4-.7-2.3-1.2-2.3-2 0-.7.7-1.4 2.3-1.4 1.3 0 2.3.3 3 .6l.4.2.6-3.2M38.7 9.1h-3.2c-1 0-1.8.3-2.2 1.3l-6.2 12.5h4.4l.9-2.3h5.4c.1.6.5 2.3.5 2.3h3.9L38.7 9.1M14.7 9.1l-4.1 9.4-.4-1.9c-1-2.3-2.9-4.8-5.3-6.4L8.5 23h4.3l6.4-13.9h-4.5z"/></svg>`,
+    MASTERCARD:`<svg viewBox="0 0 48 32"><circle cx="19" cy="16" r="10" fill="#eb001b"/><circle cx="29" cy="16" r="10" fill="#f79e1b"/><path d="M24 26a10 10 0 0 0 0-20 10 10 0 0 0 0 20z" fill="#ff5f00"/></svg>`,
+    DESCONOCIDA:``
+  };
+  function detectBrand(d){
+    if(/^4\d{0,15}$/.test(d))return'VISA';
+    if(/^(5[1-5]\d{0,14}|2(2[2-9]\d{0,12}|[3-6]\d{0,13}|7[01]\d{0,12}|720\d{0,12}))$/.test(d))return'MASTERCARD';
+    return'DESCONOCIDA';
+  }
+  pan.addEventListener('input', ()=>{
+    let digits=pan.value.replace(/\D/g,'').slice(0,16);
+    let grouped = digits.replace(/(.{4})/g,'$1 ').trim();
+    pan.value=grouped;
+
+    const brand=detectBrand(digits);
+    brandIcon.innerHTML = brand==='DESCONOCIDA' ? '' : icons[brand];
+  });
+</script>
+{% endblock %}

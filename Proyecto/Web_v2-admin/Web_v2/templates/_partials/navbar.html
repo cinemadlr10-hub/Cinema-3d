@@ -1,0 +1,63 @@
+<nav class="navbar">
+  <a href="{{ url_for('main.bienvenida') }}">Inicio</a>
+  <a href="{{ url_for('venta.cartelera') }}">Cartelera</a>
+
+  {% if is_admin() %}
+    <!-- Opciones administrativas -->
+    <div class="admin-menu">
+      <span class="admin-badge">Admin</span>
+      <a href="{{ url_for('admin.dashboard') }}">Panel Admin</a>
+      <a href="{{ url_for('admin.funciones') }}">Funciones</a>
+      <a href="{{ url_for('admin.usuarios') }}">Usuarios</a>
+    </div>
+  {% endif %}
+
+  <span style="flex:1"></span>
+
+  {% if is_logged_in() %}
+    <span class="meta">
+      Hola, {{ current_user().nombre }} 
+      {% if is_admin() %}<span class="admin-indicator">�️</span>{% endif %}
+      �👋
+    </span>
+    <a class="btn btn-outline" href="{{ url_for('auth.logout') }}">Salir</a>
+  {% else %}
+    <a class="btn btn-outline" href="{{ url_for('auth.login', next=request.path) }}">Entrar</a>
+    <a class="btn btn-primary" href="{{ url_for('auth.registro') }}">Registrarse</a>
+  {% endif %}
+</nav>
+
+<style>
+.admin-menu {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.admin-badge {
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.admin-indicator {
+  margin-left: 0.25rem;
+  font-size: 0.9rem;
+}
+
+.admin-menu a {
+  color: #f59e0b;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.admin-menu a:hover {
+  color: #d97706;
+  text-decoration: underline;
+}
+</style>
