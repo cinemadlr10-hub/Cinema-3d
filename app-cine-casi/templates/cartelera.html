@@ -1,0 +1,405 @@
+﻿{% extends "base.html" %}
+{% block title %}Cartelera | Cinema3D{% endblock %}
+
+{% block head_extras %}
+<style>
+:root{
+  --surface:#0f121a;
+  --primary:#4f6df5;
+  --text:#eaf0ff;
+  --muted:#cfe0ff;
+
+  /* padding interno uniforme para bloques con borde/redondeo */
+  --block-pad: 24px;
+}
+
+/* ===== Base ===== */
+body{
+  margin:0;
+  background:#0b0e15;
+  color:var(--text);
+  font-family: system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* =========================================================
+   HERO: ahora con padding lateral interno uniforme
+   ========================================================= */
+.car-hero{
+  width:100%;
+  margin:24px 0 14px;
+  padding:12px var(--block-pad);     /* <-- mete el contenido dentro del recuadro */
+  border-radius:16px;
+  background:var(--surface);
+  border:1px solid rgba(255,255,255,.08);
+
+  display:flex;
+  flex-wrap:wrap;                    /* si el título es largo, el botón baja pero queda dentro */
+  align-items:center;
+  column-gap:12px;
+  row-gap:10px;
+  min-height:56px;
+  box-sizing:border-box;
+  overflow:hidden;                   /* nada se sale del borde */
+}
+.car-hero .left{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  min-width:0;
+  flex:1 1 280px;                    /* ocupa el espacio y permite wraps limpios */
+}
+.car-hero .right{
+  flex:0 0 auto;
+  margin-left:auto;                  /* ancla el botón a la derecha, dentro del padding */
+}
+.car-hero .ico{
+  width:34px;height:34px;border-radius:10px;
+  display:grid;place-items:center;
+  background:rgba(79,109,245,.14);
+  border:1px solid rgba(79,109,245,.28);
+  flex:0 0 auto;
+}
+.car-hero h1{
+  margin:0;
+  font-size:clamp(20px,2.4vw,28px);
+  line-height:1.05;
+  font-weight:800;
+  white-space:normal;
+  word-break:break-word;
+}
+.car-hero .suc{ color:var(--primary); }
+
+.btn-ghost{
+  padding:.5rem 1.05rem;
+  border-radius:999px;
+  background:rgba(79,109,245,.14);
+  border:1px solid rgba(79,109,245,.30);
+  color:#eaf0ff;
+  font-weight:700;
+  text-decoration:none;
+  transition:background .15s ease, transform .15s ease;
+  white-space:nowrap;
+}
+.btn-ghost:hover{
+  background:rgba(79,109,245,.22);
+  transform:translateY(-1px);
+}
+
+/* =========================================================
+   CONTENEDOR CARTELERA (no imponemos max-width ni padding global extra)
+   ========================================================= */
+.cartelera-wrap{
+  width:100%;
+  margin:0 0 70px;
+  display:grid;
+  gap:36px;
+  padding:0;
+  box-sizing:border-box;
+}
+
+/* =========================================================
+   FILA: cabe dentro del contenedor + padding interno consistente
+   ========================================================= */
+.cartelera-row{
+  display:grid;
+  grid-template-columns:230px minmax(280px,1fr) minmax(330px,380px);
+  gap:26px;
+  padding:var(--block-pad);          /* <-- mismo inset que el hero */
+  border-radius:20px;
+  background:linear-gradient(90deg,#121428 0%,#1e2350 48%,#121428 100%);
+  border:1px solid rgba(255,255,255,.10);
+  box-shadow:0 8px 24px rgba(0,0,0,.35);
+  transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  align-items:stretch;
+  box-sizing:border-box;
+}
+.cartelera-row:hover{
+  transform:translateY(-4px);
+  border-color:rgba(79,109,245,.40);
+  box-shadow:0 14px 42px rgba(0,0,0,.45);
+}
+
+/* ===== POSTER ===== */
+.col-poster{
+  border-radius:14px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(0,0,0,.20);
+  box-shadow:inset 0 0 10px rgba(0,0,0,.40);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:8px;
+  min-height:300px;
+}
+.col-poster img{
+  width:100%;
+  height:auto;
+  display:block;
+  object-fit:contain;
+  object-position:center;
+  max-height:360px;
+  border-radius:8px;
+  transition:transform .2s ease;
+}
+.col-poster img:hover{ transform:scale(1.02); }
+
+/* ===== INFO ===== */
+.col-info{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  padding:6px 0;
+  min-width:0;
+  overflow:hidden;
+  word-wrap:break-word;
+  hyphens:auto;
+}
+.tag-col{
+  color:var(--muted);
+  font-weight:800;
+  font-size:.8rem;
+  letter-spacing:.4px;
+  text-transform:uppercase;
+  opacity:.95;
+}
+.col-info h3{
+  margin:0;
+  font-weight:900;
+  font-size:clamp(1.1rem,1.9vw,1.3rem);
+  color:#fff;
+  text-shadow:0 1px 3px rgba(0,0,0,.4);
+  line-height:1.2;
+}
+.movie-meta{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  flex-wrap:wrap;
+  color:#cfe0ff;
+  opacity:.95;
+  font-size:.95rem;
+}
+.movie-meta span:not(:last-child)::after{
+  content:"•";
+  margin-left:8px;
+  opacity:.6;
+}
+.movie-sinopsis{
+  margin:0;
+  color:#dce4ff;
+  line-height:1.45;
+  text-align:justify;
+  max-height:4.35em;
+  overflow:hidden;
+  display:-webkit-box;
+  -webkit-line-clamp:3;
+  line-clamp:3;
+  -webkit-box-orient:vertical;
+}
+
+/* ===== FUNCIONES ===== */
+.funciones-title{
+  color:#e8f0ff;
+  font-weight:800;
+  font-size:.95rem;
+  margin:6px 0 6px;
+  text-transform:uppercase;
+  letter-spacing:.3px;
+}
+.funciones-grid{
+  display:grid;
+  gap:10px;
+  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+}
+.show-btn{
+  width:100%;
+  padding:.65rem .8rem;
+  border-radius:999px;
+  background:rgba(79,109,245,.14);
+  border:1px solid rgba(79,109,245,.30);
+  color:#eaf0ff;
+  font-weight:700;
+  text-align:center;
+  cursor:pointer;
+  transition:transform .15s ease, background .15s ease, border-color .15s ease;
+  backdrop-filter:blur(4px);
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  align-items:center;
+  justify-content:center;
+  min-height:60px;
+}
+.show-btn .fecha-hora{ font-size:.85rem; opacity:.9; }
+.show-btn .sala{
+  font-size:.95rem;
+  font-weight:800;
+  color:#4f6df5;
+  text-shadow:0 0 8px rgba(79,109,245,.4);
+}
+.show-btn:hover{
+  background:rgba(79,109,245,.22);
+  border-color:rgba(79,109,245,.45);
+  transform:translateY(-1px);
+}
+
+/* ===== TRAILER ===== */
+.col-trailer{
+  border-radius:14px;
+  overflow:hidden;
+  background:rgba(6,10,22,.45);
+  border:1px solid rgba(255,255,255,.10);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:260px;
+}
+.col-trailer iframe{
+  width:100%;
+  aspect-ratio:16/9;
+  border:0;
+  display:block;
+}
+.no-trailer{
+  color:#d7e4ff;
+  font-weight:700;
+  font-size:.95rem;
+  opacity:.9;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width:1000px){
+  .cartelera-row{
+    grid-template-columns:200px minmax(250px,1fr) minmax(300px,360px);
+    gap:20px;
+  }
+}
+@media (max-width:900px){
+  .cartelera-row{
+    grid-template-columns:180px 1fr;
+    gap:18px;
+    padding:var(--block-pad);
+  }
+  .col-trailer{
+    grid-column:1 / -1;
+    margin-top:20px;
+  }
+}
+@media (max-width:640px){
+  .car-hero{
+    padding:12px var(--block-pad);  /* mantiene inset también en mobile */
+    flex-direction:column;
+    align-items:flex-start;
+  }
+  .car-hero .right{
+    margin-left:0;
+    width:100%;
+  }
+  .btn-ghost{
+    width:100%;
+    text-align:center;
+  }
+
+  .cartelera-row{
+    grid-template-columns:1fr;
+    text-align:center;
+  }
+  .col-poster{
+    max-width:260px;
+    margin:0 auto 20px;
+  }
+  .col-info{ align-items:center; }
+  .movie-meta{ justify-content:center; }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+{% macro yt_embed(u) -%}
+  {%- set url = (u or '').strip() -%}
+  {%- if not url -%}{{ '' }}{%- endif -%}
+  {%- if 'watch?v=' in url -%}
+    {{ 'https://www.youtube-nocookie.com/embed/' ~ url.split('watch?v=')[1].split('&')[0] ~ '?rel=0&modestbranding=1&playsinline=1' }}
+  {%- elif 'youtu.be/' in url -%}
+    {{ 'https://www.youtube-nocookie.com/embed/' ~ url.split('youtu.be/')[1].split('?')[0] ~ '?rel=0&modestbranding=1&playsinline=1' }}
+  {%- elif '/embed/' in url -%}
+    {%- if '?' in url -%}{{ url ~ '&rel=0&modestbranding=1&playsinline=1' }}
+    {%- else -%}{{ url ~ '?rel=0&modestbranding=1&playsinline=1' }}{%- endif -%}
+  {%- else -%}{{ url }}{%- endif -%}
+{%- endmacro %}
+
+<section class="car-hero">
+  <div class="left">
+    <div class="ico" aria-hidden="true">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <rect x="3" y="6" width="18" height="12" rx="3" fill="#4f6df5"/>
+        <circle cx="12" cy="12" r="3" fill="#fff"/>
+      </svg>
+    </div>
+    <h1>Cartelera <span class="suc">{{ sucursal }}</span></h1>
+  </div>
+  <div class="right">
+    <a href="{{ url_for('main.bienvenida') }}" class="btn-ghost">Cambiar sucursal</a>
+  </div>
+</section>
+
+<section class="cartelera-wrap">
+  {% if not movies %}
+    <div class="placeholder-row" style="padding:var(--block-pad);border:1px solid rgba(255,255,255,.10);border-radius:18px;background:linear-gradient(90deg,#121428 0%, #1e2350 48%, #121428 100%);">
+      <span class="tag" style="background:var(--primary);color:#fff;padding:6px 12px;border-radius:12px;font-weight:600;font-size:.9rem;display:inline-block;margin-bottom:12px;">Próximamente</span>
+      <h3 style="margin:0 0 8px 0;">Nuevos estrenos en camino</h3>
+      <p style="margin:0;opacity:.9">Volvé más tarde para ver las próximas funciones.</p>
+    </div>
+  {% else %}
+    {% for m in movies %}
+    <article class="cartelera-row">
+      <div class="col-poster">
+        <img src="{{ m['poster_url'] }}" alt="Póster de {{ m['titulo'] }}" loading="lazy">
+      </div>
+      <div class="col-info">
+        <span class="tag-col">Horarios</span>
+        <h3>{{ m['titulo'] }}</h3>
+        <div class="movie-meta">
+          <span>{{ m['genero'] }}</span>
+          {% if m['clasificacion'] %}<span>{{ m['clasificacion'] }}</span>{% endif %}
+          {% if m['duracion_min'] %}<span>{{ m['duracion_min'] }} min</span>{% endif %}
+        </div>
+        {% if m['sinopsis'] %}
+        <p class="movie-sinopsis">{{ m['sinopsis'] }}</p>
+        {% endif %}
+        {% if m['funciones'] %}
+        <div class="funciones-title">Funciones disponibles</div>
+        <div class="funciones-grid">
+          {% for f in m['funciones'] %}
+          <form method="post" action="{{ url_for('venta.seleccionar_funcion') }}" style="display:inline;">
+            <input type="hidden" name="movie_id" value="{{ m['id'] }}">
+            <input type="hidden" name="funcion_idx" value="{{ loop.index0 }}">
+            <button type="submit" class="show-btn">
+              <div class="fecha-hora">{{ f['fecha'] }} {{ f['hora'] }}</div>
+              <div class="sala">{{ f['sala'] }}</div>
+            </button>
+          </form>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      <div class="col-trailer">
+        {% if m['trailer_url'] %}
+        <iframe
+          src="{{ yt_embed(m['trailer_url']) }}"
+          title="Tráiler de {{ m['titulo'] }}"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          loading="lazy" allowfullscreen>
+        </iframe>
+        {% else %}
+        <div class="no-trailer">Sin tráiler disponible</div>
+        {% endif %}
+      </div>
+    </article>
+    {% endfor %}
+  {% endif %}
+</section>
+{% endblock %}

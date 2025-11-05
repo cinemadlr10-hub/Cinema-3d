@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% block title %}Pago de entradas | Cinema3D{% endblock %}
+
+{% block head_extras %}
+<style>
+  /* ===== Diseño unificado moderno (glass + grid + animaciones suaves) ===== */
+  .paynew-wrap { max-width: 960px; margin-inline: auto; padding: clamp(16px,3vw,32px); }
+  .paynew-header { text-align:center; margin-bottom: clamp(20px,3vw,32px); }
+  .paynew-header h1 { font-size: clamp(1.6rem,2.3vw,2rem); font-weight:800; margin:0 0 .25rem; }
+  .paynew-header p { color: var(--muted); margin:0; }
+
+  .summary-card {
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(79,109,245,.25);
+    border-radius: 16px;
+    padding: clamp(18px,2vw,28px);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 6px 24px rgba(0,0,0,.25);
+    margin-bottom: 24px;
+  }
+
+  .summary-card h3 { margin:0 0 10px; font-weight:700; color:#cbd5ff; }
+  .summary-info { color:var(--muted); margin-bottom: 10px; }
+  .amount-total {
+    border-top: 1px solid rgba(79,109,245,.3);
+    margin-top: 10px; padding-top: 10px;
+    display:flex; justify-content:space-between;
+    font-weight:800; font-size:1.2rem;
+  }
+  .amount-highlight{ color:#22c55e; }
+
+  /* Cambiado de grid a flex para solo un método */
+  .methods-container {
+    display:flex; justify-content:center;
+    gap: 14px; margin-bottom: 1.5rem;
+  }
+
+  .method-card {
+    /* Ajustado el ancho para el único método */
+    width: clamp(260px, 60%, 400px);
+    padding: 1.5rem;
+    border-radius: 14px;
+    border: 2px solid rgba(79,109,245,.25);
+    background: rgba(255,255,255,.03);
+    text-align:center;
+    cursor:pointer;
+    transition:all .25s ease;
+  }
+  .method-card:hover { border-color:#4f6df5; transform:translateY(-3px); }
+  .method-card.selected {
+    border-color:#4f6df5;
+    box-shadow:0 10px 25px rgba(79,109,245,.25);
+    background:rgba(79,109,245,.08);
+  }
+  .method-icon{ font-size:2.5rem; margin-bottom:.4rem; }
+  .method-title{ font-weight:700; color:var(--text); }
+  .method-desc{ color:var(--muted); font-size:.9rem; margin-top:.25rem; }
+  .method-benefit{ color:#4f6df5; font-weight:600; font-size:.85rem; margin-top:.4rem; }
+
+  .card-form{ display:none; } /* Eliminamos formulario de Tarjeta Directa */
+
+  .btn-primary{
+    width:100%; margin-top:14px;
+    padding:.85rem 1.2rem; font-weight:700; border:none;
+    border-radius:10px; color:#fff;
+    background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+    cursor:pointer; transition:transform .25s,box-shadow .25s;
+  }
+  .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 10px 25px rgba(0,0,0,.3); }
+
+  .actions{ text-align:center; margin-top:1.5rem; }
+  .actions .btn-ghost{ margin-inline:8px; }
+
+  @media(max-width:768px){
+    .paynew-wrap{ padding:1rem; }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="page-container paynew-wrap">
+  <div class="paynew-header">
+    <h1>Finalizar Compra</h1>
+    <p>Elegí el método que prefieras para completar tu pago</p>
+  </div>
+
+  <section class="summary-card">
+    <h3>Resumen de tu compra</h3>
+    <div class="summary-info">
+      <strong>{{ seleccion.titulo or 'Película seleccionada' }}</strong><br>
+      {{ seleccion.fecha or 'Fecha' }} · {{ seleccion.hora or 'Hora' }} · Sala {{ seleccion.sala or '1' }}<br>
+      Asientos: {{ seats|join(', ') if seats else 'Sin asientos' }}
+    </div>
+    {% if combos %}
+      <div class="summary-info">
+        <strong>Combos:</strong><br>
+        {% for combo in combos %}• {{ combo.nombre }} - ${{ "%.2f"|format(combo.precio) }}<br>{% endfor %}
+      </div>
+    {% endif %}
+    <div class="amount-total">
+      <span>Total a pagar</span>
+      <span class="amount-highlight">${{ "%.2f"|format(total) if total else "0.00" }}</span>
+    </div>
+  </section>
+
+  <section>
+    <form method="POST" action="{{ url_for('pago.pago') }}" class="methods-container">
+        <button type="submit" class="method-card selected" style="border-color:#4f6df5; padding: 2rem;">
+            <div class="method-icon">💳</div>
+            <div class="method-title">Pagar con Mercado Pago</div>
+            <div class="method-desc">Tarjetas, efectivo y transferencias</div>
+            <div class="method-benefit">Hacé clic para continuar con el pago →</div>
+        </button>
+    </form>
+  </section>
+  
+  <div class="actions">
+    <a href="{{ url_for('venta.combos') }}" class="btn-ghost">← Volver</a>
+    <a href="{{ url_for('main.bienvenida') }}" class="btn-ghost">Inicio</a>
+  </div>
+</div>
+
+<script>
+// El JS de manejo de tarjetas fue eliminado ya que el flujo es solo MP
+// El botón de MP ahora es un SUBMIT de formulario POST que va a pago.pago
+</script>
+{% endblock %}
